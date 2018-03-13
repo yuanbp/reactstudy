@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reactlesson9</title>
+
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+    class Input extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = ({value: 'hello!'});
+        }
+
+        handleChange(e) {
+            this.setState({value: e.target.value});
+        }
+
+        handleCleanAndFocus(e){
+            //this.refs.theInput.value='';
+            this.setState({value: ''});
+            this.refs.theInput.focus();
+        }
+
+        render() {
+            let value = this.state.value;
+            return (
+                    <div>
+                        <div onClick={this.handleCleanAndFocus.bind(this)}>
+                            Click to Focus and Reset
+                        </div>
+                        <input type="text" id={this.props.id} ref="theInput" value={value} onChange={this.handleChange.bind(this)}/>
+                        <button value="Reset" onClick={this.handleCleanAndFocus.bind(this)}>Reset</button>
+                        <p>{value}</p>
+                    </div>
+            );
+        }
+    }
+
+    ReactDOM.render(<Input id="myid"/>,document.getElementById("example"));
+</script>
+
+</body>
+</html>

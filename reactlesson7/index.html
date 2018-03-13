@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reactlesson7</title>
+
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+    <script src="../build/create-react-class.js"></script>
+</head>
+<body>
+<div id="example">
+</div>
+
+<script type="text/babel">
+    /*var MyComponent = createReactClass({
+     handleClick: function () {
+     alert(this.refs.refname.value);
+     this.refs.refname.focus();
+     },
+     render: function () {
+     return (
+     <div>
+     <input type="text" ref="refname"/>
+     <input type="button" value="Focus the text input" onClick={this.handleClick}/>
+     </div>
+     );
+     }
+     })*/
+
+    class MyComponent extends React.Component {
+        constructor(props){
+            super(props);
+            //this.handleClick=this.handleClick.bind(this);
+        }
+        handleClick() {
+            alert(this.refs.refname.value);
+            this.refs.refname.focus();
+        }
+        render() {
+            return (
+                    <div>
+                        <input type="text" ref="refname"/>
+                        <input type="button" value="Focus the text input" onClick={this.handleClick.bind(this)}/>
+                    </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+            <MyComponent/>,
+        document.getElementById("example")
+    );
+</script>
+</body>
+</html>

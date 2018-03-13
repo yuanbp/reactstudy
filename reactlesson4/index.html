@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reactlesson4</title>
+
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>-->
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+    //        var HelloMessage = React.createClass({
+    //            render:function(){
+    //                return <h1>Hello {this.props.name}</h1>;
+    //            }
+    //        });
+    /**组件名首字母必须大写，只能有一个顶层标签,可以加入任意属性，通过this.props.属性名获取*/
+    class HelloMessage extends React.Component {
+        render() {
+            return (
+                    <div>
+                        <h1>Hello {this.props.name}{/**标签内注释需要花括号，标签外注释不需要花括号*/}</h1>
+                        <h2>{this.props.desc}</h2>
+                    </div>
+            );
+        }
+    }
+    ReactDOM.render(
+            <HelloMessage name="Richard" desc="this is desc"/>,
+        document.getElementById("example")
+    );
+</script>
+</body>
+</html>

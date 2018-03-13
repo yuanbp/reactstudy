@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reactlesson10</title>
+
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+    class Hello extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = ({opacity: 1.05});
+        }
+
+        /**渲染前*/
+        componentWillMount() {
+            alert('开始渲染了!');
+        }
+
+        /**渲染后*/
+        componentDidMount() {
+            this.timer = setInterval(function () {
+                var opacity = this.state.opacity;
+                opacity -= .05;
+                if (opacity < 0.1) {
+                    opacity = 1.05;
+                }
+                if(this.refs.myrefdiv == undefined){
+                    alert('component被移除，将停止定时器！');
+                    window.clearInterval(this.timer);
+                }
+                this.setState({
+                    opacity: opacity
+                });
+            }.bind(this), 100);
+        }
+
+        /**准备更新渲染*/
+        componentWillUpdate() {
+            alert('将要进行重新渲染!');
+        }
+
+        /**更新渲染之后*/
+        componentDidUpdate(){
+            let opacity = this.state.opacity;
+            if(opacity == 1.0){
+                alert('已经重新渲染过了!');
+            }else if(opacity >= 0.1 && opacity <= 0.5){
+                if(this.refs.myrefdiv != undefined) {
+                    this.refs.myrefdiv.parentNode.removeChild(this.refs.myrefdiv);
+                }
+            }
+        }
+
+        /**移除之前*/
+        componentWillUnmount(){
+            alert('将要在dom中被移除!');
+        }
+
+        render() {
+            return (<div id="myid" ref="myrefdiv" style={{opacity: this.state.opacity}}>
+                hello {this.state.opacity}
+            </div>);
+        }
+    }
+
+    ReactDOM.render(<Hello/>, document.getElementById("example"));
+</script>
+</body>
+</html>

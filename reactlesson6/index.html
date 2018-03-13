@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>reactlesson6</title>
+
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+    <script src="../build/prop-types.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+
+    <script type="text/babel">
+        class MyTitle extends React.Component{
+            render() {
+                return (<h1>{this.props.stitle}</h1>);
+            }
+        }
+        /**组件中的title属性为字符串且必须传否则警告**/
+        MyTitle.propTypes={
+            stitle: PropTypes.string.isRequired
+        }
+
+        /**设置title的默认值如果没有传值默认设值*/
+        MyTitle.defaultProps={
+            stitle: "default title"
+        }
+
+        //var mytitle = 123;
+        //var mytitle = "test title";
+        ReactDOM.render(
+            <MyTitle />,
+            document.getElementById("example")
+        );
+    </script>
+</body>
+</html>
